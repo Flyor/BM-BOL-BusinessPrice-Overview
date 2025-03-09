@@ -1,15 +1,14 @@
 // ==UserScript==
-// @name         BM Bol Overview
+// @name         BM Bol Overview 2.2
 // @namespace    http://tampermonkey.net/
-// @version      2.0
-// @description  Wenn nach bol.de gefiltert, Anzeige aktueller Preis abzgl. BusinessConditions
+// @version      2.2
+// @description  Wenn nach bol.de gefiltert, Anzeige aktueller Preis abzgl. BusinessConditions mit Backup-Möglichkeit und Bildladefunktion
 // @match        https://www.brickmerge.de/*fm=439*
-// @updateURL    https://github.com/Flyor/BM-BOL-BusinessPrice-Overview/raw/refs/heads/main/BM-BOL-BussinessPrice-Overview.user.js
-// @downloadURL  https://github.com/Flyor/BM-BOL-BusinessPrice-Overview/raw/refs/heads/main/BM-BOL-BussinessPrice-Overview.user.js
+// @updateURL    https://github.com/Flyor/BM-BOL-BusinessPrice-Overview/raw/refs/heads/main/BM-BOL-BusinessPrice-Overview.user.js
+// @downloadURL  https://github.com/Flyor/BM-BOL-BusinessPrice-Overview/raw/refs/heads/main/BM-BOL-BusinessPrice-Overview.user.js
 // @grant        none
 // @author       Stonehiller Industries
 // ==/UserScript==
-
 
 (function() {
     'use strict';
@@ -21,7 +20,7 @@
         var imgs = document.querySelectorAll('img');
         imgs.forEach(function(img) {
             var dataSrc = img.getAttribute('data-src');
-            if (dataSrc && (!img.src || img.src.indexOf('ajax-loader_white.gif') !== -1)) {
+            if (dataSrc && (img.src.indexOf('spacer.gif') !== -1 || !img.src)) {
                 img.src = dataSrc;
                 img.removeAttribute('data-src');
             }
@@ -50,6 +49,10 @@
         if (!upperContainer) return;
         var offerBox = upperContainer.querySelector('.offerbox');
         if (!offerBox) return;
+
+        // Erstelle ein Backup des ursprünglichen Preistextes
+        offerBox.dataset.originalPriceText = offerBox.textContent;
+
         var hasCode = (offerBox.textContent.indexOf("[Code]") !== -1);
         offerBox.style.height = 'auto';
         var priceSpan = offerBox.querySelector('.theprice');
@@ -256,6 +259,26 @@
         toggleButton.textContent = filterActive ? "Filter: Ein" : "Filter: Aus";
         updateFilter();
     });
+
+    // ---------------------------
+    // MutationObserver hinzufügen, um Änderungen im DOM zu überwachen
+    // ---------------------------
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length) {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.nodeType === 1 && node.classList.contains('slide')) {
+                        updateAllLazyImages();
+                    }
+                });
+            }
+        });
+    });
+
+    var productContainer = document.querySelector('#wrappernormal');
+    if (productContainer) {
+        observer.observe(productContainer, { childList: true, subtree: true });
+    }
 
     updateAllLazyImages();
     updateFilter();
