@@ -4,8 +4,8 @@
 // @version      2.2
 // @description  Wenn nach bol.de gefiltert, Anzeige aktueller Preis abzgl. BusinessConditions mit Backup-Möglichkeit und Bildladefunktion
 // @match        https://www.brickmerge.de/*fm=439*
-// @updateURL    https://github.com/Flyor/BM-BOL-BusinessPrice-Overview/raw/refs/heads/main/BM-BOL-BusinessPrice-Overview.user.js
-// @downloadURL  https://github.com/Flyor/BM-BOL-BusinessPrice-Overview/raw/refs/heads/main/BM-BOL-BusinessPrice-Overview.user.js
+// @updateURL    https://github.com/Flyor/BM-BOL-BusinessPrice-Overview/raw/refs/heads/main/BM-BOL-BussinessPrice-Overview.user.js
+// @downloadURL  https://github.com/Flyor/BM-BOL-BusinessPrice-Overview/raw/refs/heads/main/BM-BOL-BussinessPrice-Overview.user.js
 // @grant        none
 // @author       Stonehiller Industries
 // ==/UserScript==
