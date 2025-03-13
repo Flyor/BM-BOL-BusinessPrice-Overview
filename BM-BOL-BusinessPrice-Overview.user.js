@@ -1,13 +1,15 @@
 // ==UserScript==
-// @name         BM Bol Overview 2.2
-// @namespace    http://tampermonkey.net/
-// @version      2.2
+// @name         BM Bol Overview 
+// @namespace    https://brickmerge.de/
+// @version      2.3
 // @description  Wenn nach bol.de gefiltert, Anzeige aktueller Preis abzgl. BusinessConditions mit Backup-Möglichkeit und Bildladefunktion
 // @match        https://www.brickmerge.de/*fm=439*
 // @updateURL    https://github.com/Flyor/BM-BOL-BusinessPrice-Overview/raw/refs/heads/main/BM-BOL-BusinessPrice-Overview.user.js
 // @downloadURL  https://github.com/Flyor/BM-BOL-BusinessPrice-Overview/raw/refs/heads/main/BM-BOL-BusinessPrice-Overview.user.js
 // @grant        none
 // @author       Stonehiller Industries
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=brickmerge.de
+
 // ==/UserScript==
 
 (function() {
